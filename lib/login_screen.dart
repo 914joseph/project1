@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:project1/bd.dart';
+import 'package:project1/data/contas_dao.dart';
+
+import 'bd.dart';
+import 'data/BD.dart';
+import 'domain/contas.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -14,7 +18,19 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _loginEmailController = TextEditingController();
   final TextEditingController _loginPasswordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  BD bd = BD();
+  ContasDao contasDao = ContasDao();
+  BDD bdd = BDD();
+Contas contaa = Contas();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    contasDao.listarContas();
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,8 +125,8 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future Validation(TextEditingController senha,TextEditingController email,context) async{
-    for(bd in BD.listaBD){
-      if(bd.email == email.text && bd.senha == senha.text){
+    for(contaa in BDD.listaContas){
+      if(contaa.email == email.text && contaa.senha == senha.text){
         Navigator.pushReplacementNamed(context, "/home");
       }
     }
