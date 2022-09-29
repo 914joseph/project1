@@ -19,14 +19,19 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _loginPasswordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   ContasDao contasDao = ContasDao();
-  BDD bdd = BDD();
+
 Contas contaa = Contas();
+  List<Contas> list = [];
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    contasDao.listarContas();
+    getListFromDatabase();
+  }
+
+  void getListFromDatabase() async {
+    list = await contasDao.listarContas();
   }
 
 
@@ -109,7 +114,7 @@ Contas contaa = Contas();
               child: Container(width: MediaQuery.of(context).size.width,
               child: ElevatedButton(child: Text("Entrar"), onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  Validation(
+                  validation(
                       _loginPasswordController, _loginEmailController, context);
                 }
               },style: ElevatedButton.styleFrom(primary: Colors.grey[800]),
@@ -124,9 +129,9 @@ Contas contaa = Contas();
     );
   }
 
-  Future Validation(TextEditingController senha,TextEditingController email,context) async{
-    for(contaa in BDD.listaContas){
-      if(contaa.email == email.text && contaa.senha == senha.text){
+  Future validation(TextEditingController senha,TextEditingController email,context) async{
+    for(int i=0; i<list.length; i++){
+      if(list[i].email == email.text && list[i].senha == senha.text){
         Navigator.pushReplacementNamed(context, "/home");
       }
     }
