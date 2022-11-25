@@ -28,8 +28,8 @@ class _HomePageState extends State<HomePage> {
 
   List<Widget> pages = <Widget>[
     ApiPage(),
-    Text("olaaaaa"),
-    Text("tchaauuu")
+    Center(child: Text("to do")),
+    Center(child: Text("to do"))
   ];
 
 

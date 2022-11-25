@@ -6,7 +6,7 @@ import 'package:project1/signup_screen.dart';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    initialRoute: "/home",
+    initialRoute: "/login",
     routes: {
       "/login":(_)=> LoginScreen(),
       "/signup":(_)=> SignUpScreen(),
